@@ -5,6 +5,7 @@ import Topbar from './Topbar';
 import Contentbody from './Contentbody';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import useWindowDimensions from 'useDimensions';
+import Dashboard from '../components/dashboard/Dashboard';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,8 +50,9 @@ const Layout: React.FC<Props> = ({ light, ...rest }: any) => {
 
     return (
         <Container className={classes.root} >
-            <Topbar light={light} menuShow={isMenuShow} isClickMobile={isClickMobile} setIsClickMobile={setIsClickMobile} isMobile={isMobile} onClickMenuItem={onClickIsMenuShow} {...rest} />
-            <Contentbody light={light} isClickMobile={isClickMobile} setIsClickMobile={setIsClickMobile} menuShow={isMenuShow} isMobile={isMobile} {...rest} />
+            <Dashboard light={light} menuShow={isMenuShow} isClickMobile={isClickMobile} setIsClickMobile={setIsClickMobile} isMobile={isMobile} onClickMenuItem={onClickIsMenuShow} {...rest} />
+            {/* <Topbar light={light} menuShow={isMenuShow} isClickMobile={isClickMobile} setIsClickMobile={setIsClickMobile} isMobile={isMobile} onClickMenuItem={onClickIsMenuShow} {...rest} />
+            <Contentbody light={light} isClickMobile={isClickMobile} setIsClickMobile={setIsClickMobile} menuShow={isMenuShow} isMobile={isMobile} {...rest} /> */}
         </Container>
     );
 }
