@@ -9,6 +9,9 @@ import HomeIcon from '@material-ui/icons/Home';
 import PrintIcon from '@material-ui/icons/Print';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
+import Lightlogo from '../assets/images/lightlogo.png';
+import Darklogo from '../assets/images/darklogo.png';
+
 interface Props {
     connected:any;
     onConnect: any;
@@ -24,7 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        height: '100%'
+        height: '100%',
+        // transition: '.3s',
+        // width: 
     },
     menuItem: {
         display: 'flex',
@@ -35,13 +40,25 @@ const useStyles = makeStyles((theme: Theme) =>
         color: '#666666',
         cursor: 'pointer',
     },
+    logo: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        color: theme.palette.text.primary,
+        marginTop: 20,
+        marginBottom: 20,
+        cursor: 'pointer',
+        [theme.breakpoints.down("xs")]: {
+            paddingRight: 0,
+        }
+    },
     item: {
         marginLeft: 15
     }
   }),
 );
 
-const Sidebarmobile: React.FC<Props> = ({ connected, onConnect, chainId, clickedItem, onClickMenuItem }:any) => {
+const Sidebarmobile: React.FC<Props> = ({ connected, onConnect, chainId, clickedItem, onClickMenuItem, light }:any) => {
     const classes = useStyles();
     const clickItem = (item: "Dashboard" | "Recovery" | "Investment")=>{
         if(item === clickedItem) return;
@@ -49,6 +66,11 @@ const Sidebarmobile: React.FC<Props> = ({ connected, onConnect, chainId, clicked
     }
     return (
         <Box className={classes.root}>
+            <Grid className={classes.logo}>
+                {!light && <img style={{width: 25, height: 25}} src={Darklogo} alt='The TIKI Bar' />}
+                {light && <img style={{width: 25, height: 25}} src={Lightlogo} alt='The TIKI Bar' />}
+                <span style={{marginLeft:15}}>The TIKI Bar</span>
+            </Grid>
             <Grid className={classes.menuItem} onClick={()=>clickItem("Dashboard")}>
                 <HomeIcon />
                 <span className={classes.item}>Dashboard</span>

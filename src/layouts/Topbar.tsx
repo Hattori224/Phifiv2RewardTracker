@@ -6,8 +6,8 @@ import ThemeSwitch from '../components/ThemeSwitch';
 
 import DescriptionIcon from '@material-ui/icons/Description';
 
-import Lightlogo from '../assets/images/lightlogo.jpg';
-import Darklogo from '../assets/images/darklogo.jpg';
+import Lightlogo from '../assets/images/lightlogo.png';
+import Darklogo from '../assets/images/darklogo.png';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -103,19 +103,23 @@ interface Props {
     onConnect: any;
     chainId: any;
     menuShow: boolean;
-    onClickMenuItem:()=>void
+    onClickMenuItem:()=>void;
+    isClickMobile: boolean;
+    setIsClickMobile: () => void;
 }
 
-const Topbar: React.FC<Props> = ({ connected, setConnected, onConnect, chainId, menuShow, onClickMenuItem, light, setTheme }:any) => {
+const Topbar: React.FC<Props> = ({ connected, setConnected, onConnect, chainId, isClickMobile, setIsClickMobile, menuShow, onClickMenuItem, light, setTheme }:any) => {
     const classes = useStyles();
     const MenuShow = ()=>{
         onClickMenuItem(!menuShow);
+        setIsClickMobile(!isClickMobile);
     }
 
     return (
         <Grid className={classes.root}>
             <Grid className={classes.logo} item xs={12} sm={2}>
-                <img style={{width: 25, height: 25}} src={Darklogo} alt='The TIKI Bar' />
+                {!light && <img style={{width: 25, height: 25}} src={Darklogo} alt='The TIKI Bar' />}
+                {light && <img style={{width: 25, height: 25}} src={Lightlogo} alt='The TIKI Bar' />}
                 <span style={{marginLeft:15}}>The TIKI Bar</span>
             </Grid>
             <Grid className={classes.menuIcon} item xs={12} sm={2} onClick={MenuShow}>

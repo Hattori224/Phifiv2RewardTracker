@@ -40,6 +40,12 @@ const useStyles = makeStyles((theme: Theme) =>
         fontSize: 17,
         fontWeight: 500,
         color: 'white',
+        "@media (max-width: 1024px)": {
+            display: 'none',
+        },
+        "@media (min-width: 1024px)": {
+            marginRight: 0,
+        }
     },
     assetLeft: {
         display: 'flex',

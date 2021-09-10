@@ -5,6 +5,10 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Layout from './layouts';
 import { Box } from '@material-ui/core';
 
+import Dashboard from 'pages/Dashboard';
+import Recovery from 'pages/Recovery';
+import Investment from 'pages/Investment';
+
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import {
@@ -25,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const XendFianance = ({ light, setTheme, connected, setConnected, omitted, setOmitted }:any) => {
+const Phifiv2RewardTracker = ({ light, setTheme, connected, setConnected, omitted, setOmitted }:any) => {
   const classes = useStyles();
 
   const [web3, setWeb3]: any = useState(null);
@@ -156,10 +160,19 @@ const XendFianance = ({ light, setTheme, connected, setConnected, omitted, setOm
         <Router>
           <Switch>
               <Layout light={light} setTheme={setTheme} connected={connected} onConnect={onConnect} chainId={chainId}>
+                <Route exact path='/'>
+                  <Dashboard connected={connected} />
+                </Route>
+                <Route exact path='/recovery'>
+                  <Recovery connected={connected} />
+                </Route>
+                <Route exact path='/investment'>
+                  <Investment connected={connected} />
+                </Route>
               </Layout>
           </Switch>
         </Router>
     </Box>
   );
 }
-export default XendFianance;
+export default Phifiv2RewardTracker;

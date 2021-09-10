@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import { Container } from '@material-ui/core';
 import Topbar from './Topbar';
 import Contentbody from './Contentbody';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import useWindowDimensions from 'useDimensions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,10 +35,22 @@ const Layout: React.FC<Props> = ({ light, ...rest }: any) => {
         setIsMenuShow(!isMenuShow);
     }
 
+    const [isClickMobile, setIsClickMobile] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
+    const screenWidth = useWindowDimensions().width
+    useEffect(() => {
+        if (screenWidth > 1024) {
+            setIsMobile(false)
+        }
+        else {
+            setIsMobile(true)
+        }
+    }, [screenWidth])
+
     return (
         <Container className={classes.root} >
-            <Topbar light={light} menuShow={isMenuShow} onClickMenuItem={onClickIsMenuShow} {...rest} />
-            <Contentbody light={light} menuShow={isMenuShow} {...rest} />
+            <Topbar light={light} menuShow={isMenuShow} isClickMobile={isClickMobile} setIsClickMobile={setIsClickMobile} isMobile={isMobile} onClickMenuItem={onClickIsMenuShow} {...rest} />
+            <Contentbody light={light} isClickMobile={isClickMobile} menuShow={isMenuShow} isMobile={isMobile} {...rest} />
         </Container>
     );
 }

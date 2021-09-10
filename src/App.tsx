@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StylesProvider, MuiThemeProvider, ThemeProvider } from '@material-ui/core/styles';
 import { themeLight, themeDark } from './theme';
-import XendFianance from './XendFianance';
+import XendFianance from './Phifiv2RewardTracker';
 
 function App() {
 
