@@ -45,11 +45,11 @@ const MenuContent: React.FC<Props> = ({ connected, clickedItem }:any) => {
     const classes = useStyles();
 
     return (
-        <Box className={classes.root}>
+        <Grid className={classes.root} item xs={12} >
             {clickedItem==="Dashboard" && <Dashboard  connected={connected} />}
             {clickedItem==="Recovery" && <Recovery  connected={connected} />}
             {clickedItem==="Investment" && <Investment  connected={connected} />}
-        </Box>
+        </Grid>
     );
 }
 

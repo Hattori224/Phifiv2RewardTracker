@@ -170,7 +170,7 @@ const useStyles = makeStyles((theme: Theme) =>
         background: theme.palette.background.paper,
         fontSize: 17,
         fontWeight: 500,
-        color: 'white',
+        color: theme.palette.text.primary,
     },
     oneItemEven: {
         marginTop: 15,

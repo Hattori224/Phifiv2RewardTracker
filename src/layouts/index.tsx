@@ -50,7 +50,7 @@ const Layout: React.FC<Props> = ({ light, ...rest }: any) => {
     return (
         <Container className={classes.root} >
             <Topbar light={light} menuShow={isMenuShow} isClickMobile={isClickMobile} setIsClickMobile={setIsClickMobile} isMobile={isMobile} onClickMenuItem={onClickIsMenuShow} {...rest} />
-            <Contentbody light={light} isClickMobile={isClickMobile} menuShow={isMenuShow} isMobile={isMobile} {...rest} />
+            <Contentbody light={light} isClickMobile={isClickMobile} setIsClickMobile={setIsClickMobile} menuShow={isMenuShow} isMobile={isMobile} {...rest} />
         </Container>
     );
 }

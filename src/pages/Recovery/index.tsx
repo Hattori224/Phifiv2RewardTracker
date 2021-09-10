@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: any) =>
   createStyles({
     root: {
         width: '100%',
-        minHeight: 'calc(100vh - 203px)'
+        minHeight: 'calc(100vh)'
     }
   }),
 );

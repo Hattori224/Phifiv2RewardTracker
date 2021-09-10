@@ -12,15 +12,20 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Lightlogo from '../assets/images/lightlogo.png';
 import Darklogo from '../assets/images/darklogo.png';
 
+interface BgProps {
+    isShow: any;
+}
+
 interface Props {
     connected:any;
     onConnect: any;
     chainId: any;
     clickedItem: "Dashboard" | "Recovery" | "Investment";
-    onClickMenuItem:(clickedItem:string)=>void
+    onClickMenuItem:(clickedItem:string)=>void;
+    isClickMobile: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme: Theme ) =>
   createStyles({
     root: {
         backgroundColor: theme.palette.background.default,
@@ -28,8 +33,8 @@ const useStyles = makeStyles((theme: Theme) =>
         flexDirection: 'column',
         alignItems: 'flex-start',
         height: '100%',
-        // transition: '.3s',
-        // width: 
+        transition: '.3s',
+        width: (props:BgProps) => props.isShow * 250,
     },
     menuItem: {
         display: 'flex',
@@ -58,15 +63,22 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const Sidebarmobile: React.FC<Props> = ({ connected, onConnect, chainId, clickedItem, onClickMenuItem, light }:any) => {
-    const classes = useStyles();
+const Sidebarmobile: React.FC<Props> = ({ connected, onConnect, chainId, isClickMobile, setIsClickMobile, clickedItem, onClickMenuItem, light }:any) => {
     const clickItem = (item: "Dashboard" | "Recovery" | "Investment")=>{
         if(item === clickedItem) return;
         onClickMenuItem(item);
+        setIsClickMobile(false);
     }
+    
+    const mobileWidth = {
+        isShow: isClickMobile
+    };
+
+    const classes = useStyles(mobileWidth);
+
     return (
         <Box className={classes.root}>
-            <Grid className={classes.logo}>
+            <Grid className={classes.logo} onClick={()=>clickItem("Dashboard")}>
                 {!light && <img style={{width: 25, height: 25}} src={Darklogo} alt='The TIKI Bar' />}
                 {light && <img style={{width: 25, height: 25}} src={Lightlogo} alt='The TIKI Bar' />}
                 <span style={{marginLeft:15}}>The TIKI Bar</span>

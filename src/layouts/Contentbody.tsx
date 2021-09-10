@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         sidebarmobile: {
             backgroundColor: theme.palette.background.default,
-            width: '100%',
+            width: (props: BgProps) => props.isShow * 250,
             height: '100%',
             maxWidth: '250px',
             minWidth: '250px',
@@ -51,17 +51,25 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+interface BgProps {
+    isShow: any;
+}
+
 interface Props {
     light: boolean,
     isMobile: boolean,
 }
 
-const Contentbody: React.FC<Props> = ({ light, menuShow, isClickMobile, isMobile, ...rest }: any) => {
-    const classes = useStyles();
+const Contentbody: React.FC<Props> = ({ light, menuShow, isClickMobile, setIsClickMobile, isMobile, ...rest }: any) => {
     const [clickedItem, setClickItem] = useState("Dashboard")
     const onClickMenuItem = (item: string) => {
         setClickItem(item);
     }
+
+    const mobileWidth = {
+        isShow: isClickMobile * isMobile
+    };
+    const classes = useStyles(mobileWidth);
 
     return (
         <Grid className={classes.root}>
@@ -71,7 +79,7 @@ const Contentbody: React.FC<Props> = ({ light, menuShow, isClickMobile, isMobile
                 </Grid>
             }
             {isClickMobile && isMobile && <Grid className={classes.sidebarmobile}>
-                <Sidebarmobile light={light} {...rest} clickedItem={clickedItem} onClickMenuItem={onClickMenuItem} item xs={12} sm={3} />
+                <Sidebarmobile light={light} {...rest} isClickMobile={isClickMobile} setIsClickMobile={setIsClickMobile} clickedItem={clickedItem} onClickMenuItem={onClickMenuItem} item xs={12} sm={3} />
             </Grid>}
             <Grid className={classes.menucontent} item xs={12} sm={12}>
                 <MenuContent light={light} {...rest} clickedItem={clickedItem} />
